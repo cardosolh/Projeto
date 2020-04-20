@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Projeto.Model
 {
     [Table("perfil_recurso")]
-    public class PerssoaRecurso : BaseEntity
+    public class PessoaGrupo : BaseEntity
     {
         [Column(name: "ano")]
         public int Ano { set; get; }
