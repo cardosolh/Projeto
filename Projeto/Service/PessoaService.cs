@@ -26,11 +26,11 @@ namespace Projeto.Service
             }
         }
 
-        public List<PessoaVO> getAll(PessoaVO filter = null)
+        public List<PessoaVO> getAll(int pageNumber, int numberOffElements, PessoaVO filter = null)
         {
             try
             {
-                return dao.Select(1, 5, filter);
+                return dao.Select(pageNumber, numberOffElements, filter);
             }
             catch (Exception)
             {

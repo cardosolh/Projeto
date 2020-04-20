@@ -19,12 +19,12 @@ namespace Projeto.Controllers
 
         [HttpGet]
         // GET api/<controller>
-        public List<PessoaVO> Get()
+        public List<PessoaVO> Get( int pageNumber = 0, int numberOffElements = 0)
         {
             try
             {
                 
-                return pessoaService.getAll();
+                return pessoaService.getAll(pageNumber, numberOffElements, null);
             }
             catch (Exception e)
             {
