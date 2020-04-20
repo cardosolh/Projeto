@@ -19,9 +19,17 @@ namespace Projeto.Controllers
 
         [HttpGet]
         // GET api/<controller>
-        public IEnumerable<string> Get()
+        public List<PessoaVO> Get()
         {
-            return new string[] { "UNI", "BH" };
+            try
+            {
+                
+                return pessoaService.getAll();
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
         }
 
         [HttpGet("{id}")]

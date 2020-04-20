@@ -25,5 +25,18 @@ namespace Projeto.Service
                 throw new System.ArgumentException("Estudar...", "estudar...");
             }
         }
+
+        public List<PessoaVO> getAll(PessoaVO filter = null)
+        {
+            try
+            {
+                return dao.Select(1, 5, filter);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

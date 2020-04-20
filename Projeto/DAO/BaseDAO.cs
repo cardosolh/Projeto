@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Projeto.Model;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Projeto.DAO
@@ -86,6 +87,45 @@ namespace Projeto.DAO
             return false;
 
         }
+
+        public virtual List<VO> Select(int pageNumber ,int numberOffElements, VO filter) {
+
+            var filteredIdensVO = new List<VO>();
+
+            using (TContext context = new TContext())
+            {
+
+                int currentPage = pageNumber == 0 ? pageNumber = 1 : pageNumber;
+
+                IQueryable<Entity> dbQuery = context.Set<Entity>();
+                dbQuery = GetCustomWhere(dbQuery, filter);
+
+                int totalItens = dbQuery.Count();
+                int itemPerPage = numberOffElements == 0 ? totalItens : numberOffElements;
+
+                dbQuery = dbQuery.Skip((currentPage - 1) * numberOffElements).Take(itemPerPage);
+
+                IEnumerable<Entity> filteredItems = dbQuery;
+                
+
+                if (itemPerPage > 0) {
+                    filteredIdensVO = filteredItems.Select(m => FromEntityToVO(m)).ToList();
+                }
+
+
+
+            }
+            return filteredIdensVO;
+        }
+
+        public virtual VO FromEntityToVO(Entity entity) {
+            return _mapper.Map<VO>(entity);
+        }
+
+        public virtual IQueryable<Entity> GetCustomWhere(IQueryable<Entity> query, VO filter) {
+            return query;
+        }
+
 
 
     }
