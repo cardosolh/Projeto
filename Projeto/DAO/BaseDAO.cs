@@ -94,21 +94,31 @@ namespace Projeto.DAO
 
             using (TContext context = new TContext())
             {
-
+                // Determina, através de operador ternário qual a página atual da consulta
                 int currentPage = pageNumber == 0 ? pageNumber = 1 : pageNumber;
 
+
                 IQueryable<Entity> dbQuery = context.Set<Entity>();
+
+                // Recupera dados do banco com condicionais da consulta
                 dbQuery = GetCustomWhere(dbQuery, filter);
 
+                // Recupera a quantidade total de registros encontrados na consulta
                 int totalItens = dbQuery.Count();
+
+                // Determina, através de operador ternário, a quantidade máxima de registros
+                // exibidos por pagina
                 int itemPerPage = numberOffElements == 0 ? totalItens : numberOffElements;
 
+                // Filtra os registros da página atual
                 dbQuery = dbQuery.Skip((currentPage - 1) * numberOffElements).Take(itemPerPage);
 
+                // Transforma o resultado da consulta em objeto navegável
                 IEnumerable<Entity> filteredItems = dbQuery;
                 
 
                 if (itemPerPage > 0) {
+                    // Converte objeto navegável em lista de Value Objects
                     filteredIdensVO = filteredItems.Select(m => FromEntityToVO(m)).ToList();
                 }
 
