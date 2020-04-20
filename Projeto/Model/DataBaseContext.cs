@@ -20,6 +20,11 @@ namespace Projeto.Model
 
         public virtual DbSet<Pessoa> Pessoa { get; set; }
         public virtual DbSet<Recurso> Recurso { get; set; }
+        public virtual DbSet<Anotacao> Anotacao { get; set; }
+        public virtual DbSet<Grupo> Grupo { get; set; }
+        public virtual DbSet<Login> Login { get; set; }
+        public virtual DbSet<Perfil> Perfil { get; set; }
+        public virtual DbSet<PessoaGrupo> PessoaGrupo { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
