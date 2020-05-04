@@ -12,31 +12,31 @@ namespace Projeto.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PessoasGruposController : ControllerBase
+    public class PerfisRecursosController : ControllerBase
     {
 
-        PessoaGrupoService pessoaGrupoService = new PessoaGrupoService();
+        PerfilRecursoService perfilRecursoService = new PerfilRecursoService();
 
         [HttpGet("{pageNumber}/{pageSize}/")]
-        public List<PessoaGrupoVO> Get(int pageNumber = 1, int pageSize = 1, [FromQuery] PessoaGrupoVO filter = null)
+        public List<PerfilRecursoVO> Get(int pageNumber = 1, int pageSize = 1, [FromQuery] PerfilRecursoVO filter = null)
         {
-            return pessoaGrupoService.GetAll(pageNumber, pageSize, filter);
+            return perfilRecursoService.GetAll(pageNumber, pageSize, filter);
         }
 
         [HttpGet("{id}")]
         // GET api/<controller>/5
-        public PessoaGrupoVO Get(int id)
+        public PerfilRecursoVO Get(int id)
         {
-            return pessoaGrupoService.GetOne(id);
+            return perfilRecursoService.GetOne(id);
         }
 
         // POST api/<controller>
         [HttpPost]
-        public ActionResult Post([FromBody] PessoaGrupoVO pessoa_grupo)
+        public ActionResult Post([FromBody] PerfilRecursoVO perfil_recurso)
         {
             try
             {
-                pessoaGrupoService.save(pessoa_grupo);
+                perfilRecursoService.save(perfil_recurso);
                 return Ok();
             }
             catch(Exception e)
@@ -47,13 +47,13 @@ namespace Projeto.Controllers
         }
 
         [HttpPut]
-        public ActionResult Put([FromBody]PessoaGrupoVO vo)
+        public ActionResult Put([FromBody]PerfilRecursoVO vo)
         {
             if (vo.id > 0)
             {
                 try
                 {
-                    pessoaGrupoService.Update(vo);
+                    perfilRecursoService.Update(vo);
                     return Ok();
                 }
                 catch
@@ -75,7 +75,7 @@ namespace Projeto.Controllers
         {
             try
             {
-                if (pessoaGrupoService.Delete(id))
+                if (perfilRecursoService.Delete(id))
                     return Ok();
                 else
                     return BadRequest();

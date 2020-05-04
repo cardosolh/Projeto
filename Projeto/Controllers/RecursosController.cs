@@ -17,18 +17,17 @@ namespace Projeto.Controllers
 
         RecursoService recursoService = new RecursoService();
 
-        [HttpGet]
-        // GET api/<controller>
-        public IEnumerable<string> Get()
+        [HttpGet("{pageNumber}/{pageSize}/")]
+        public List<RecursoVO> Get(int pageNumber = 1, int pageSize = 1, [FromQuery] RecursoVO filter = null)
         {
-            return new string[] { "UNI", "BH" };
+            return recursoService.GetAll(pageNumber, pageSize, filter);
         }
 
         [HttpGet("{id}")]
         // GET api/<controller>/5
-        public string Get(int id)
+        public RecursoVO Get(int id)
         {
-            return "value";
+            return recursoService.GetOne(id);
         }
 
         // POST api/<controller>
@@ -40,23 +39,50 @@ namespace Projeto.Controllers
                 recursoService.save(recurso);
                 return Ok();
             }
+            catch(Exception e)
+            {
+                return StatusCode(400, e.Message);
+            }
+            
+        }
+
+        [HttpPut]
+        public ActionResult Put([FromBody]RecursoVO vo)
+        {
+            if (vo.id > 0)
+            {
+                try
+                {
+                    recursoService.Update(vo);
+                    return Ok();
+                }
+                catch
+                {
+                    return StatusCode(400, "Coloque o erro correto e uma msg");
+                }
+
+            }
+            else
+            {
+                return StatusCode(400, "Coloque o erro correto e uma msg");
+            }
+
+        }
+        // DELETE api/<controller>/5
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                if (recursoService.Delete(id))
+                    return Ok();
+                else
+                    return BadRequest();
+            }
             catch (Exception e)
             {
                 return StatusCode(400, e.Message);
             }
-
-        }
-
-        // PUT api/<controller>/5
-        [HttpPut]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        [HttpDelete]
-        public void Delete(int id)
-        {
         }
 
     }

@@ -9,16 +9,15 @@ namespace Projeto.Service
 {
     public class AnotacaoService
     {
+
         AnotacaoDAO dao = new AnotacaoDAO();
-        public AnotacaoVO save(AnotacaoVO pessoa)
+        public AnotacaoVO save(AnotacaoVO anotacao)
         {
             try
             {
-                if (pessoa.id > 0)
-                {
-                    dao.Save(pessoa);
-                }
-                return pessoa;
+                dao.Save(anotacao);
+
+                return anotacao;
             }
             catch
             {
@@ -26,17 +25,54 @@ namespace Projeto.Service
             }
         }
 
-        public List<AnotacaoVO> getAll(AnotacaoVO filter = null)
+        public bool Update(AnotacaoVO vo)
         {
             try
             {
-                return dao.Select(1, 5, filter);
+                return dao.Update(vo);
             }
-            catch (Exception)
+            catch
             {
+                throw new System.ArgumentException("Estudar...", "estudar...");
+            }
+        }
 
-                throw;
+        public List<AnotacaoVO> GetAll(int pageNumber, int pageSize, AnotacaoVO filter = null)
+        {
+            try
+            {
+                return dao.Select(pageNumber, pageSize, filter);
+            }
+            catch
+            {
+                throw new System.ArgumentException("Estudar...", "estudar...");
+            }
+        }
+
+        public AnotacaoVO GetOne(int id = 0)
+        {
+            try
+            {
+                return dao.SelectOne(id);
+            }
+            catch
+            {
+                throw new System.ArgumentException("Estudar...", "estudar...");
+            }
+        }
+
+        public bool Delete(int id)
+        {
+            try
+            {
+                return dao.Delete(id);
+            }
+            catch
+            {
+                throw new System.ArgumentException("Estudar...", "estudar...");
             }
         }
     }
 }
+
+

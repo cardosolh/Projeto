@@ -17,26 +17,17 @@ namespace Projeto.Controllers
 
         AnotacaoService anotacaoService = new AnotacaoService();
 
-        [HttpGet]
-        // GET api/<controller>
-        public List<AnotacaoVO> Get()
+        [HttpGet("{pageNumber}/{pageSize}/")]
+        public List<AnotacaoVO> Get(int pageNumber = 1, int pageSize = 100, [FromQuery] AnotacaoVO filter = null)
         {
-            try
-            {
-
-                return anotacaoService.getAll();
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
+            return anotacaoService.GetAll(pageNumber, pageSize, filter);
         }
 
         [HttpGet("{id}")]
         // GET api/<controller>/5
-        public string Get(int id)
+        public AnotacaoVO Get(int id)
         {
-            return "value";
+            return anotacaoService.GetOne(id);
         }
 
         // POST api/<controller>
@@ -48,23 +39,51 @@ namespace Projeto.Controllers
                 anotacaoService.save(anotacao);
                 return Ok();
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 return StatusCode(400, e.Message);
+            }
+            
+        }
+
+        [HttpPut]
+        public ActionResult Put([FromBody]AnotacaoVO vo)
+        {
+            if (vo.id > 0)
+            {
+                try
+                {
+                    anotacaoService.Update(vo);
+                    return Ok();
+                }
+                catch
+                {
+                    return StatusCode(400, "Coloque o erro correto e uma msg");
+                }
+
+            }
+            else
+            {
+                return StatusCode(400, "Coloque o erro correto e uma msg");
             }
 
         }
 
-        // PUT api/<controller>/5
-        [HttpPut]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
         // DELETE api/<controller>/5
-        [HttpDelete]
-        public void Delete(int id)
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
         {
+            try
+            {
+                if (anotacaoService.Delete(id))
+                    return Ok();
+                else
+                    return BadRequest();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(400, e.Message);
+            }
         }
 
     }

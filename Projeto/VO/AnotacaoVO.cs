@@ -7,9 +7,12 @@ namespace Projeto.VO
 {
     public class AnotacaoVO : BaseVO
     {
-        public string obs { set; get; }
+        public string  obs { set; get; }
 
-        public DateTime data { get; set; }
+        public System.DateTime data { set; get; }
 
+        public int id_grupo { set; get; }
+
+        public int id_pessoa { set; get; }
     }
 }

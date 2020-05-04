@@ -9,16 +9,17 @@ namespace Projeto.Service
 {
     public class GrupoService
     {
+        
         GrupoDAO dao = new GrupoDAO();
-        public GrupoVO save(GrupoVO pessoa)
+        public GrupoVO save(GrupoVO grupo)
         {
             try
             {
-                if (pessoa.id > 0)
+                if (grupo.id > 0)
                 {
-                    dao.Save(pessoa);
+                    dao.Save(grupo);
                 }
-                return pessoa;
+                return grupo;
             }
             catch
             {
@@ -26,16 +27,51 @@ namespace Projeto.Service
             }
         }
 
-        public List<GrupoVO> getAll(GrupoVO filter = null)
+        public bool Update(GrupoVO vo)
         {
             try
             {
-                return dao.Select(1, 5, filter);
+                return dao.Update(vo);
             }
-            catch (Exception)
+            catch
             {
+                throw new System.ArgumentException("Estudar...", "estudar...");
+            }
+        }
 
-                throw;
+        public List<GrupoVO> GetAll(int pageNumber, int pageSize, GrupoVO filter = null)
+        {
+            try
+            {
+                return dao.Select(pageNumber, pageSize, filter);
+            }
+            catch
+            {
+                throw new System.ArgumentException("Estudar...", "estudar...");
+            }
+        }
+
+        public GrupoVO GetOne(int id = 0)
+        {
+            try
+            {
+                return dao.SelectOne(id);
+            }
+            catch
+            {
+                throw new System.ArgumentException("Estudar...", "estudar...");
+            }
+        }
+
+        public bool Delete(int id)
+        {
+            try
+            {
+                return dao.Delete(id);
+            }
+            catch
+            {
+                throw new System.ArgumentException("Estudar...", "estudar...");
             }
         }
     }

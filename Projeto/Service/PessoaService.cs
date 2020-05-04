@@ -10,7 +10,7 @@ namespace Projeto.Service
     public class PessoaService
     {
         PessoaDAO dao = new PessoaDAO();
-        public PessoaVO save(PessoaVO pessoa)
+        public PessoaVO Save(PessoaVO pessoa)
         {
             try
             {
@@ -18,6 +18,7 @@ namespace Projeto.Service
                 {
                     dao.Save(pessoa);
                 }
+            
                 return pessoa;
             }
             catch
@@ -26,16 +27,51 @@ namespace Projeto.Service
             }
         }
 
-        public List<PessoaVO> getAll(int pageNumber, int numberOffElements, PessoaVO filter = null)
+        public List<PessoaVO> GetAll(int pageNumber, int pageSize, PessoaVO filter = null)
         {
             try
             {
-                return dao.Select(pageNumber, numberOffElements, filter);
+                return dao.Select(pageNumber,pageSize,filter);
             }
-            catch (Exception)
+            catch
             {
+                throw new System.ArgumentException("Estudar...", "estudar...");
+            }
+        }
 
-                throw;
+        public PessoaVO GetOne(int id = 0)
+        {
+            try
+            {
+                return dao.SelectOne(id);
+            }
+            catch
+            {
+                throw new System.ArgumentException("Estudar...", "estudar...");
+            }
+        }
+
+        public bool Delete(int id)
+        {
+            try
+            {
+                return dao.Delete(id);
+            }
+            catch
+            {
+                throw new System.ArgumentException("Estudar...", "estudar...");
+            }
+        }
+
+        public bool Update(PessoaVO vo)
+        {
+            try
+            {
+                return dao.Update(vo);
+            }
+            catch
+            {
+                throw new System.ArgumentException("Estudar...", "estudar...");
             }
         }
     }

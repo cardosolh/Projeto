@@ -17,26 +17,17 @@ namespace Projeto.Controllers
 
         PerfilService perfilService = new PerfilService();
 
-        [HttpGet]
-        // GET api/<controller>
-        public List<PerfilVO> Get()
+        [HttpGet("{pageNumber}/{pageSize}/")]
+        public List<PerfilVO> Get(int pageNumber = 1, int pageSize = 1, [FromQuery] PerfilVO filter = null)
         {
-            try
-            {
-
-                return perfilService.getAll();
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
+            return perfilService.GetAll(pageNumber, pageSize, filter);
         }
 
         [HttpGet("{id}")]
         // GET api/<controller>/5
-        public string Get(int id)
+        public PerfilVO Get(int id)
         {
-            return "value";
+            return perfilService.GetOne(id);
         }
 
         // POST api/<controller>
@@ -48,23 +39,51 @@ namespace Projeto.Controllers
                 perfilService.save(perfil);
                 return Ok();
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 return StatusCode(400, e.Message);
+            }
+            
+        }
+
+        [HttpPut]
+        public ActionResult Put([FromBody]PerfilVO vo)
+        {
+            if (vo.id > 0)
+            {
+                try
+                {
+                    perfilService.Update(vo);
+                    return Ok();
+                }
+                catch
+                {
+                    return StatusCode(400, "Coloque o erro correto e uma msg");
+                }
+
+            }
+            else
+            {
+                return StatusCode(400, "Coloque o erro correto e uma msg");
             }
 
         }
 
-        // PUT api/<controller>/5
-        [HttpPut]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
         // DELETE api/<controller>/5
-        [HttpDelete]
-        public void Delete(int id)
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
         {
+            try
+            {
+                if (perfilService.Delete(id))
+                    return Ok();
+                else
+                    return BadRequest();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(400, e.Message);
+            }
         }
 
     }

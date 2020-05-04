@@ -9,16 +9,17 @@ namespace Projeto.Service
 {
     public class PerfilService
     {
+        
         PerfilDAO dao = new PerfilDAO();
-        public PerfilVO save(PerfilVO pessoa)
+        public PerfilVO save(PerfilVO perfil)
         {
             try
             {
-                if (pessoa.id > 0)
+                if (perfil.descricao.Count() > 0)
                 {
-                    dao.Save(pessoa);
+                    dao.Save(perfil);
                 }
-                return pessoa;
+                return perfil;
             }
             catch
             {
@@ -26,16 +27,51 @@ namespace Projeto.Service
             }
         }
 
-        public List<PerfilVO> getAll(PerfilVO filter = null)
+        public bool Update(PerfilVO vo)
         {
             try
             {
-                return dao.Select(1, 5, filter);
+                return dao.Update(vo);
             }
-            catch (Exception)
+            catch
             {
+                throw new System.ArgumentException("Estudar...", "estudar...");
+            }
+        }
 
-                throw;
+        public List<PerfilVO> GetAll(int pageNumber, int pageSize, PerfilVO filter = null)
+        {
+            try
+            {
+                return dao.Select(pageNumber, pageSize, filter);
+            }
+            catch
+            {
+                throw new System.ArgumentException("Estudar...", "estudar...");
+            }
+        }
+
+        public PerfilVO GetOne(int id = 0)
+        {
+            try
+            {
+                return dao.SelectOne(id);
+            }
+            catch
+            {
+                throw new System.ArgumentException("Estudar...", "estudar...");
+            }
+        }
+
+        public bool Delete(int id)
+        {
+            try
+            {
+                return dao.Delete(id);
+            }
+            catch
+            {
+                throw new System.ArgumentException("Estudar...", "estudar...");
             }
         }
     }

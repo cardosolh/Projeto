@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 
 namespace Projeto.VO
 {
-    public class PerfilRecursoVO
+    public class PerfilRecursoVO : BaseVO
     {
         public int id_perfil { set; get; }
 
-        public int id_recurso { get; set; }
+        public int id_recurso { set; get; }
     }
 }
-

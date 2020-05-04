@@ -7,7 +7,7 @@ namespace Projeto.Model
     [Table("grupo")]
     public class Grupo : BaseEntity
     {
-        [Column(name: "nome")]
-        public string Nome { set; get; }
+        [Column(name: "Nome")]
+        public string nome { set; get; }
     }
 }

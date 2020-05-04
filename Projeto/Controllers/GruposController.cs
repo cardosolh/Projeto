@@ -17,26 +17,17 @@ namespace Projeto.Controllers
 
         GrupoService grupoService = new GrupoService();
 
-        [HttpGet]
-        // GET api/<controller>
-        public List<GrupoVO> Get()
+        [HttpGet("{pageNumber}/{pageSize}/")]
+        public List<GrupoVO> Get(int pageNumber = 1, int pageSize = 1, [FromQuery] GrupoVO filter = null)
         {
-            try
-            {
-
-                return grupoService.getAll();
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
+            return grupoService.GetAll(pageNumber, pageSize, filter);
         }
 
         [HttpGet("{id}")]
         // GET api/<controller>/5
-        public string Get(int id)
+        public GrupoVO Get(int id)
         {
-            return "value";
+            return grupoService.GetOne(id);
         }
 
         // POST api/<controller>
@@ -48,23 +39,51 @@ namespace Projeto.Controllers
                 grupoService.save(grupo);
                 return Ok();
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 return StatusCode(400, e.Message);
+            }
+            
+        }
+
+        [HttpPut]
+        public ActionResult Put([FromBody]GrupoVO vo)
+        {
+            if (vo.id > 0)
+            {
+                try
+                {
+                    grupoService.Update(vo);
+                    return Ok();
+                }
+                catch
+                {
+                    return StatusCode(400, "Coloque o erro correto e uma msg");
+                }
+
+            }
+            else
+            {
+                return StatusCode(400, "Coloque o erro correto e uma msg");
             }
 
         }
 
-        // PUT api/<controller>/5
-        [HttpPut]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
+        [HttpDelete("{id}")]
         // DELETE api/<controller>/5
-        [HttpDelete]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            try
+            {
+                if (grupoService.Delete(id))
+                    return Ok();
+                else
+                    return BadRequest();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(400, e.Message);
+            }
         }
 
     }

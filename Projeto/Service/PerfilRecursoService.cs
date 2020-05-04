@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace Projeto.Service
 {
-    public class LoginService
+    public class PerfilRecursoService
     {
         
-        LoginDAO dao = new LoginDAO();
-        public LoginVO save(LoginVO login)
+        PerfilRecursoDAO dao = new PerfilRecursoDAO();
+        public PerfilRecursoVO save(PerfilRecursoVO perfil_recurso)
         {
             try
             {
-                if (login.id > 0)
+                if (perfil_recurso.id > 0)
                 {
-                    dao.Save(login);
+                    dao.Save(perfil_recurso);
                 }
-                return login;
+                return perfil_recurso;
             }
             catch
             {
@@ -27,7 +27,7 @@ namespace Projeto.Service
             }
         }
 
-        public bool Update(LoginVO vo)
+        public bool Update(PerfilRecursoVO vo)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace Projeto.Service
             }
         }
 
-        public List<LoginVO> GetAll(int pageNumber, int pageSize, LoginVO filter = null)
+        public List<PerfilRecursoVO> GetAll(int pageNumber, int pageSize, PerfilRecursoVO filter = null)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace Projeto.Service
             }
         }
 
-        public LoginVO GetOne(int id = 0)
+        public PerfilRecursoVO GetOne(int id = 0)
         {
             try
             {

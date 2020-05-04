@@ -1,7 +1,6 @@
-﻿using System;
-using Projeto.DAO;
+﻿using Projeto.DAO;
 using Projeto.VO;
-
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,16 +9,17 @@ namespace Projeto.Service
 {
     public class PessoaGrupoService
     {
+        
         PessoaGrupoDAO dao = new PessoaGrupoDAO();
-        public PessoaGrupoVO save(PessoaGrupoVO pessoa)
+        public PessoaGrupoVO save(PessoaGrupoVO pessoa_grupo)
         {
             try
             {
-                if (pessoa.id > 0)
+                if (pessoa_grupo.id > 0)
                 {
-                    dao.Save(pessoa);
+                    dao.Save(pessoa_grupo);
                 }
-                return pessoa;
+                return pessoa_grupo;
             }
             catch
             {
@@ -27,16 +27,51 @@ namespace Projeto.Service
             }
         }
 
-        public List<PessoaGrupoVO> getAll(PessoaGrupoVO filter = null)
+        public bool Update(PessoaGrupoVO vo)
         {
             try
             {
-                return dao.Select(1, 5, filter);
+                return dao.Update(vo);
             }
-            catch (Exception)
+            catch
             {
+                throw new System.ArgumentException("Estudar...", "estudar...");
+            }
+        }
 
-                throw;
+        public List<PessoaGrupoVO> GetAll(int pageNumber, int pageSize, PessoaGrupoVO filter = null)
+        {
+            try
+            {
+                return dao.Select(pageNumber, pageSize, filter);
+            }
+            catch
+            {
+                throw new System.ArgumentException("Estudar...", "estudar...");
+            }
+        }
+
+        public PessoaGrupoVO GetOne(int id = 0)
+        {
+            try
+            {
+                return dao.SelectOne(id);
+            }
+            catch
+            {
+                throw new System.ArgumentException("Estudar...", "estudar...");
+            }
+        }
+
+        public bool Delete(int id)
+        {
+            try
+            {
+                return dao.Delete(id);
+            }
+            catch
+            {
+                throw new System.ArgumentException("Estudar...", "estudar...");
             }
         }
     }

@@ -7,10 +7,14 @@ namespace Projeto.VO
 {
     public class PessoaGrupoVO : BaseVO
     {
-        public int ano { get; set; }
-        public int id_grupo { get; set; }
-        public int id_pessoa { get; set; }
-        public int semestre { get; set; }
         public string papel { set; get; }
+
+        public int semestre { set; get; }
+
+        public int ano { set; get; }
+
+        public int id_grupo { set; get; }
+
+        public int id_pessoa { set; get; }
     }
 }

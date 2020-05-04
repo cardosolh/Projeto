@@ -16,27 +16,20 @@ namespace Projeto.Controllers
     {
 
         PessoaService pessoaService = new PessoaService();
-
-        [HttpGet]
+        //exemplo de chamada do postman
+        //https://localhost:5002/api/pessoas/1/100?nome=Rodrigo
+        [HttpGet("{pageNumber}/{pageSize}/")]
         // GET api/<controller>
-        public List<PessoaVO> Get( int pageNumber = 0, int numberOffElements = 0)
+        public List<PessoaVO> Get(int pageNumber = 1, int pageSize = 100, [FromQuery] PessoaVO filter = null)
         {
-            try
-            {
-                
-                return pessoaService.getAll(pageNumber, numberOffElements, null);
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
+            return pessoaService.GetAll(pageNumber, pageSize, filter);
         }
 
         [HttpGet("{id}")]
         // GET api/<controller>/5
-        public string Get(int id)
+        public PessoaVO Get(int id)
         {
-            return "value";
+            return pessoaService.GetOne(id);
         }
 
         // POST api/<controller>
@@ -45,26 +38,55 @@ namespace Projeto.Controllers
         {
             try
             {
-                pessoaService.save(pessoa);
+                pessoaService.Save(pessoa);
                 return Ok();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return StatusCode(400, e.Message);
             }
-            
+
         }
 
-        // PUT api/<controller>/5
         [HttpPut]
-        public void Put(int id, [FromBody]string value)
+        public ActionResult Put([FromBody]PessoaVO vo)
         {
+            if(vo.id > 0)
+            {
+                try 
+                { 
+                    pessoaService.Update(vo);
+                    return Ok();
+                }
+                catch
+                {
+                    return StatusCode(400, "Coloque o erro correto e uma msg");
+                }
+                    
+            }
+            else
+            {
+                return StatusCode(400, "Coloque o erro correto e uma msg");
+            }
+               
         }
 
         // DELETE api/<controller>/5
-        [HttpDelete]
-        public void Delete(int id)
+        //para testar fica assim https://localhost:5001/api/pessoas/1 onde 1 é o id que vc quer apagar
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
         {
+            try
+            {
+                if(pessoaService.Delete(id))
+                    return Ok();
+                else
+                    return BadRequest();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(400, e.Message);
+            }
         }
 
     }

@@ -14,12 +14,12 @@ namespace Projeto.Model
             CreateMap<Pessoa, PessoaVO>()
             .ReverseMap()
             .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
-
+            
             CreateMap<Recurso, RecursoVO>()
-           .ReverseMap()
-           .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+            .ReverseMap()
+            .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
-            CreateMap<Anotacao, AnotacaoVO>()
+            CreateMap<Login, LoginVO>()
             .ReverseMap()
             .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
@@ -31,16 +31,13 @@ namespace Projeto.Model
             .ReverseMap()
             .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
+            CreateMap<PerfilRecurso, PerfilRecursoVO>()
+            .ReverseMap()
+            .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+
             CreateMap<PessoaGrupo, PessoaGrupoVO>()
-            .ReverseMap()
-            .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
-
-            CreateMap<Login, LoginVO>()
-            .ReverseMap()
-            .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
-
-
-
+           .ReverseMap()
+           .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
         }
     }

@@ -17,26 +17,17 @@ namespace Projeto.Controllers
 
         LoginService loginService = new LoginService();
 
-        [HttpGet]
-        // GET api/<controller>
-        public List<LoginVO> Get()
+        [HttpGet("{pageNumber}/{pageSize}/")]
+        public List<LoginVO> Get(int pageNumber = 1, int pageSize = 1, [FromQuery] LoginVO filter = null)
         {
-            try
-            {
-
-                return loginService.getAll();
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
+            return loginService.GetAll(pageNumber, pageSize, filter);
         }
 
         [HttpGet("{id}")]
         // GET api/<controller>/5
-        public string Get(int id)
+        public LoginVO Get(int id)
         {
-            return "value";
+            return loginService.GetOne(id);
         }
 
         // POST api/<controller>
@@ -48,23 +39,51 @@ namespace Projeto.Controllers
                 loginService.save(login);
                 return Ok();
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 return StatusCode(400, e.Message);
+            }
+            
+        }
+
+        [HttpPut]
+        public ActionResult Put([FromBody]LoginVO vo)
+        {
+            if (vo.id > 0)
+            {
+                try
+                {
+                    loginService.Update(vo);
+                    return Ok();
+                }
+                catch
+                {
+                    return StatusCode(400, "Coloque o erro correto e uma msg");
+                }
+
+            }
+            else
+            {
+                return StatusCode(400, "Coloque o erro correto e uma msg");
             }
 
         }
 
-        // PUT api/<controller>/5
-        [HttpPut]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
         // DELETE api/<controller>/5
-        [HttpDelete]
-        public void Delete(int id)
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
         {
+            try
+            {
+                if (loginService.Delete(id))
+                    return Ok();
+                else
+                    return BadRequest();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(400, e.Message);
+            }
         }
 
     }
