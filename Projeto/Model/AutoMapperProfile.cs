@@ -39,6 +39,10 @@ namespace Projeto.Model
            .ReverseMap()
            .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
+            CreateMap<Anotacao, AnotacaoVO>()
+            .ReverseMap()
+            .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+
         }
     }
 }

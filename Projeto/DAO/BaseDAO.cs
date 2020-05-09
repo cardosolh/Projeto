@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Projeto.Model;
 using Projeto.VO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -66,9 +67,9 @@ namespace Projeto.DAO
                     context.SaveChanges();
                 }
             }
-            catch
+            catch (Exception e)
             {   // Caso ele não consiga salvar ele lança uma exceção
-                throw new System.Exception("");
+                throw new System.Exception(e.Message);
             }
 
         }

@@ -32,6 +32,8 @@ namespace Projeto.Model
 
         public virtual DbSet<Login> Login { get; set; }
 
+        public virtual DbSet<Anotacao> Anotacao { get; set; }
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
