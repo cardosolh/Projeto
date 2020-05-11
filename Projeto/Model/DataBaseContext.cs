@@ -41,7 +41,7 @@ namespace Projeto.Model
             if (!optionsBuilder.IsConfigured)
             {
                 //o correto é colocar isso no arquivo de configuração
-                optionsBuilder.UseMySql("server=localhost;database=seunome;user=root;password=");
+                optionsBuilder.UseMySql("server=localhost;database=luizcardoso;user=root;password=");
             }
         }
 
