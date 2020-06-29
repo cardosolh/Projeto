@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace Projeto.Model
@@ -31,6 +32,7 @@ namespace Projeto.Model
         public virtual DbSet<PessoaGrupo> PessoaGrupo { get; set; }
 
         public virtual DbSet<Login> Login { get; set; }
+        
 
         public virtual DbSet<Anotacao> Anotacao { get; set; }
 

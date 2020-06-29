@@ -16,6 +16,13 @@ namespace Projeto.Controllers
     public class LoginsController : BaseController<LoginService, LoginDAO, Login, LoginVO, DataBaseContext, AutoMapperProfile>
     {
 
+        [HttpGet("teste/{pagNumber}/{pageSize}/")]
+
+        public List<LoginVO> GetInclude(int pageNumber = 1, int pageSize = 100, [FromQuery] LoginVO filter = null)
+        {
+            return new LoginService().GetAllInclude(pageNumber, pageSize, filter);
+        }
+
         //LoginService loginService = new LoginService();
 
         //[HttpGet("{pageNumber}/{pageSize}/")]
@@ -44,7 +51,7 @@ namespace Projeto.Controllers
         //    {
         //        return StatusCode(400, e.Message);
         //    }
-            
+
         //}
 
         //[HttpPut]

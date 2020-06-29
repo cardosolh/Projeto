@@ -44,6 +44,8 @@ namespace Projeto.Controllers
         {
             try
             {
+                Random random = new Random();
+                anotacao.id = random.Next(3, 70);
                 baseService.save(anotacao);
                 return Ok();
             }

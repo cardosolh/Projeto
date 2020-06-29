@@ -1,4 +1,5 @@
 ﻿
+using Projeto.VO;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
@@ -18,6 +19,9 @@ namespace Projeto.Model
 
         [Column(name: "User")]
         public string User { set; get; }
+
+        [ForeignKey("Id_pessoa")]
+        public virtual Pessoa Pessoa { get; set; }
 
 
     }

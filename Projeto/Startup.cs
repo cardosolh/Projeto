@@ -51,6 +51,8 @@ namespace Projeto
                 c.RoutePrefix = string.Empty;
             });
 
+            app.UseCors(builder => { builder.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod(); });
+
             app.UseHttpsRedirection();
 
             app.UseRouting();

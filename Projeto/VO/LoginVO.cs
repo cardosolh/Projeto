@@ -14,5 +14,7 @@ namespace Projeto.VO
         public int id_perfil { set; get; }
 
         public int id_pessoa { set; get; }
+
+        public virtual PessoaVO pessoa { set; get; }
     }
 }

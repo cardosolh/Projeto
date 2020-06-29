@@ -52,7 +52,7 @@ namespace Projeto.DAO
                       de mesmo nome. 
                     */
                     entity = _mapper.Map<VO, Entity>(vo, entity);
-
+                    
                     /*
                      * Adicionando um objeto ao contexto atual, neste momento ainda não foi persistido
                      * no banco de dados. As linhas 60 e 61 colocam a entidade no estado adicionado, o que 
@@ -141,13 +141,6 @@ namespace Projeto.DAO
                 int totalItems = dbQuery.Count();
                 int itemPerPage = numberOfElements == 0 ? totalItems : numberOfElements;
 
-                /*
-                 * Skip: ignora os N primeiros elementos de uma consulta.
-                 * Take: retorna os N primeiros elementos de uma consulta.
-                 * Imagine um banco de dados com 1000 tuplas. Você poderia ignorar as 500 primeiras
-                 * com Skip(500) e pegar as próximas 100 com Take(100). Isso quer dizer que você 
-                 * pegaria as 100 primeiras tuplas a partir da 500.
-                 */
                 dbQuery = dbQuery
                     .Skip((currentPage - 1) * numberOfElements)
                     .Take(itemPerPage);
@@ -156,10 +149,6 @@ namespace Projeto.DAO
 
                 if(itemPerPage > 0)
                 {
-                    /*
-                     * para cada elemento obtido na consulta, ele transforma o que será retornado (entity)
-                     * em um VO. 
-                    */
                     filteredItensVO = filteredItems
                         .Select(m => FromEntityToVO(m))
                         .ToList();

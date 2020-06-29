@@ -10,7 +10,20 @@ namespace Projeto.Service
 {
     public class LoginService : BaseService<LoginDAO, Login, LoginVO, DataBaseContext, AutoMapperProfile>
     {
-        
+
+        public virtual List<LoginVO> GetAllInclude(int pageNumber, int pageSize, LoginVO filter = null)
+        {
+            try
+            {
+                return new LoginDAO().SelectWithInclude(pageNumber, pageSize, filter);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+
         //LoginDAO dao = new LoginDAO();
         //public LoginVO save(LoginVO login)
         //{
