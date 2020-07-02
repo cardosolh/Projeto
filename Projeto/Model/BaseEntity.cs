@@ -9,5 +9,7 @@ namespace Projeto.Model
         [Key]
         [Column(name: "ID")]
         public virtual int Id { get; set; }
+
+
     }
 }

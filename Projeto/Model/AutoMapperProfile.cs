@@ -20,7 +20,6 @@ namespace Projeto.Model
             .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
             CreateMap<Login, LoginVO>()
-                .ForMember(dest => dest.pessoa, m => m.MapFrom(src=> src.Pessoa))
             .ReverseMap()
             .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 

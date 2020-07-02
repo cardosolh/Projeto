@@ -122,7 +122,7 @@ namespace Projeto.DAO
             Entity entity;
             using (TContext context = new TContext())
             {
-                entity = context.Set<Entity>().Where(m => m.Id == id).FirstOrDefault();
+                entity = context.Set<Entity>().Where(m => m.Id == id).FirstOrDefault() ;
             }
             return entity != null ? FromEntityToVO(entity) : null;
         }
@@ -136,7 +136,7 @@ namespace Projeto.DAO
                 int currentPage = pageNumber == 0 ? pageNumber = 1 : pageNumber;
 
                 IQueryable<Entity> dbQuery = context.Set<Entity>();
-                dbQuery = GetCustomWhere(dbQuery, filter);
+                dbQuery = GetCustomWhere(dbQuery, filter).LoadRelated();
 
                 int totalItems = dbQuery.Count();
                 int itemPerPage = numberOfElements == 0 ? totalItems : numberOfElements;
@@ -206,6 +206,7 @@ namespace Projeto.DAO
         {
             return query;
         }
-        
+
     }
+
 }

@@ -12,10 +12,12 @@ namespace Projeto.Model
 
         public DataBaseContext()
         {
+            // Login.Include(p => p.Pessoa).Load();
         }
 
         public DataBaseContext(DbContextOptions<DataBaseContext> options)
         {
+            
 
         }
 

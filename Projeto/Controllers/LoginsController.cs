@@ -20,6 +20,7 @@ namespace Projeto.Controllers
 
         public List<LoginVO> GetInclude(int pageNumber = 1, int pageSize = 100, [FromQuery] LoginVO filter = null)
         {
+
             return new LoginService().GetAllInclude(pageNumber, pageSize, filter);
         }
 

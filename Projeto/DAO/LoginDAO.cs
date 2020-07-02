@@ -14,7 +14,7 @@ namespace Projeto.DAO
 
             using (DataBaseContext context = new DataBaseContext())
             {
-                context.Login.Include(p => p.Pessoa).Load();
+                //context.Login.Include(p => p.Pessoa).Load();
 
                 int currentPage = pageNumber == 0 ? pageNumber = 1 : pageNumber;
 
